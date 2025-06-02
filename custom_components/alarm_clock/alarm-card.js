@@ -6,6 +6,18 @@ import {
 import { AlarmCardEditor } from "./alarm-card-editor.js";
 import styles from "./styles.js";
 
+if (!customElements.get("ha-switch")) {
+  customElements.define("ha-switch", class extends HTMLElement {});
+}
+
+if (!customElements.get("ha-icon-button")) {
+  customElements.define("ha-icon-button", class extends HTMLElement {});
+}
+
+if (!customElements.get("mwc-button")) {
+  customElements.define("mwc-button", class extends HTMLElement {});
+}
+
 class AlarmCard extends LitElement {
   static get properties() {
     return {

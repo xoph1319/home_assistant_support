@@ -1,4 +1,4 @@
-import { css } from "https://unpkg.com/lit-element@2.4.0/lit-element.js?module";
+import { css } from "lit";
 
 export default css`
   :host {

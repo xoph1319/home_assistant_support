@@ -4,6 +4,10 @@ import {
   css,
 } from "https://unpkg.com/lit-element@2.4.0/lit-element.js?module";
 
+if (!customElements.get("ha-textfield")) {
+  customElements.define("ha-textfield", class extends HTMLElement {});
+}
+
 class AlarmCardEditor extends LitElement {
   static get properties() {
     return {
