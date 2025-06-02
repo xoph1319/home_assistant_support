@@ -2,7 +2,7 @@ import {
   LitElement,
   html,
   css,
-} from "https://unpkg.com/lit-element@2.4.0/lit-element.js?module";
+} from "https://unpkg.com/@ha/frontend@20240319.1/lit.js";
 
 if (!customElements.get("ha-textfield")) {
   customElements.define("ha-textfield", class extends HTMLElement {});
