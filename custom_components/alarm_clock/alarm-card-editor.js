@@ -1,10 +1,19 @@
-class AlarmCardEditor extends HTMLElement {
-  setConfig(config) {
-    this._config = config;
+import {
+  LitElement,
+  html,
+  css,
+} from "https://unpkg.com/lit-element@2.4.0/lit-element.js?module";
+
+class AlarmCardEditor extends LitElement {
+  static get properties() {
+    return {
+      hass: { type: Object },
+      _config: { type: Object },
+    };
   }
 
-  static get properties() {
-    return { hass: {}, _config: {} };
+  setConfig(config) {
+    this._config = config;
   }
 
   get _title() {
