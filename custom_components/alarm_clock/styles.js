@@ -65,6 +65,90 @@ const styles = `
   ha-icon-button {
     color: var(--primary-text-color);
   }
+
+  .automation-section {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--divider-color);
+  }
+
+  .automation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .automation-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--primary-text-color);
+  }
+
+  .automation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .automation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-radius: 4px;
+    background: var(--secondary-background-color);
+  }
+
+  .automation-name {
+    font-size: 14px;
+    color: var(--primary-text-color);
+  }
+
+  .automation-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .no-automations {
+    color: var(--secondary-text-color);
+    font-style: italic;
+    font-size: 14px;
+    text-align: center;
+    padding: 8px;
+  }
+
+  .automation-dialog {
+    padding: 16px;
+  }
+
+  .form-field {
+    margin-bottom: 16px;
+  }
+
+  .form-field label {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--primary-text-color);
+    font-size: 14px;
+  }
+
+  .form-field input[type="text"],
+  .form-field input[type="number"],
+  .form-field select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--divider-color);
+    border-radius: 4px;
+    background: var(--card-background-color);
+    color: var(--primary-text-color);
+  }
+
+  .form-field input[type="range"] {
+    width: 100%;
+  }
 `;
 
 export default styles;
