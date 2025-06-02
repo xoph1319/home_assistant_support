@@ -95,24 +95,130 @@ You can use Siri to control your alarms with commands like:
 
 ### Lovelace Card Configuration
 
-Add the custom card to your Lovelace dashboard:
+There are several ways to add the custom card to your Lovelace dashboard:
+
+#### Method 1: Using the UI
 
 1. Go to your dashboard
 2. Click the three dots menu (⋮) in the top right
 3. Click "Edit Dashboard"
 4. Click the "+" button to add a new card
 5. Scroll to the bottom and click "Custom: Alarm Clock Card"
-6. Click "Save"
+6. (Optional) Configure the card title
+7. Click "Save"
 
-The card will automatically display all your configured alarms and allow you to:
+#### Method 2: Using YAML Configuration
 
-- Add new alarms
-- Delete existing alarms
-- Toggle alarms on/off
-- Set alarm time
-- Configure repeat settings
-- Select days for the alarm
-- Create and manage automations
+If you prefer to configure your Lovelace dashboard using YAML, add the following to your `ui-lovelace.yaml` file or your dashboard's YAML configuration:
+
+```yaml
+views:
+  - title: My View
+    cards:
+      - type: custom:alarm-card
+        title: My Alarms # Optional
+```
+
+#### Method 3: Using the Raw Configuration Editor
+
+1. Go to your dashboard
+2. Click the three dots menu (⋮) in the top right
+3. Click "Edit Dashboard"
+4. Click the three dots menu again
+5. Click "Raw configuration editor"
+6. Add the card configuration:
+   ```yaml
+   type: custom:alarm-card
+   title: My Alarms # Optional
+   ```
+7. Click "Save"
+
+#### Installing the Card Files
+
+Before you can use the card, you need to make sure the card files are properly installed:
+
+1. Copy the following files to your Home Assistant configuration directory:
+
+   ```
+   custom_components/
+   └── alarm_clock/
+       ├── alarm-card.js
+       ├── alarm-card-editor.js
+       └── styles.js
+   ```
+
+2. Add the card to your Lovelace resources. You can do this in two ways:
+
+   **Method 1: Using the UI**
+
+   1. Go to Configuration -> Lovelace Dashboards
+   2. Click the "Resources" tab
+   3. Click the "+" button
+   4. Add the following resource:
+      - URL: `/local/custom_components/alarm_clock/alarm-card.js`
+      - Resource type: "JavaScript Module"
+   5. Click "Create"
+
+   **Method 2: Using YAML**
+   Add the following to your `configuration.yaml`:
+
+   ```yaml
+   lovelace:
+     resources:
+       - url: /local/custom_components/alarm_clock/alarm-card.js
+         type: module
+   ```
+
+#### Card Features
+
+Once added to your dashboard, the card provides:
+
+1. Alarm Management:
+
+   - View all configured alarms
+   - Add new alarms with the "+" button
+   - Delete existing alarms
+   - Toggle alarms on/off
+   - Set alarm times using a time picker
+   - Configure repeat settings
+   - Select specific days for each alarm
+
+2. Automation Management:
+
+   - View automations associated with each alarm
+   - Create new automations directly from the card
+   - Edit existing automations
+   - Enable/disable automations
+   - Delete automations
+
+3. Visual Feedback:
+   - Clear status indicators for each alarm
+   - Visual distinction between active and inactive alarms
+   - Day selection buttons with active state indication
+   - Intuitive controls for all functions
+
+#### Troubleshooting
+
+If the card doesn't appear:
+
+1. Check that the files are in the correct location:
+
+   ```
+   /config/custom_components/alarm_clock/alarm-card.js
+   /config/custom_components/alarm_clock/alarm-card-editor.js
+   /config/custom_components/alarm_clock/styles.js
+   ```
+
+2. Verify the resource is properly loaded:
+
+   - Check the browser's developer console for any errors
+   - Make sure the resource URL matches your file location
+   - Try clearing your browser cache
+
+3. Common Issues:
+   - If the card shows as "Custom card not found", check your resource configuration
+   - If the card appears but doesn't load, check the browser console for JavaScript errors
+   - If the card loads but shows no alarms, verify your alarm configurations
 
 ### Configuration Options
 
