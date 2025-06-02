@@ -1,4 +1,15 @@
-const styles = `
+import { css } from "https://unpkg.com/lit-element@2.4.0/lit-element.js?module";
+
+export default css`
+  :host {
+    display: block;
+    padding: 16px;
+  }
+
+  ha-card {
+    width: 100%;
+  }
+
   .card-content {
     padding: 16px;
   }
@@ -7,8 +18,8 @@ const styles = `
     margin-bottom: 16px;
     padding: 16px;
     border-radius: 8px;
-    background: var(--ha-card-background, var(--card-background-color, white));
-    box-shadow: var(--ha-card-box-shadow, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2));
+    background: var(--card-background-color, #fff);
+    box-shadow: var(--ha-card-box-shadow, 0 2px 2px rgba(0, 0, 0, 0.14));
   }
 
   .alarm-row {
@@ -19,7 +30,7 @@ const styles = `
   }
 
   .alarm-time input[type="time"] {
-    font-size: 24px;
+    font-size: 1.5em;
     padding: 8px;
     border: none;
     background: transparent;
@@ -34,36 +45,25 @@ const styles = `
 
   .days-selector {
     display: flex;
-    gap: 4px;
-    margin-bottom: 16px;
     flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
   }
 
   .days-selector mwc-button {
     --mdc-theme-primary: var(--primary-color);
-    --mdc-theme-on-primary: var(--text-primary-color);
     min-width: 40px;
   }
 
   .days-selector mwc-button.selected {
     background-color: var(--primary-color);
     color: var(--text-primary-color);
-    --mdc-theme-primary: var(--primary-color);
   }
 
   .repeat-toggle {
     display: flex;
     align-items: center;
     gap: 8px;
-  }
-
-  .add-alarm {
-    margin-top: 16px;
-    text-align: center;
-  }
-
-  ha-icon-button {
-    color: var(--primary-text-color);
   }
 
   .automation-section {
@@ -81,15 +81,8 @@ const styles = `
 
   .automation-header h3 {
     margin: 0;
-    font-size: 16px;
+    font-size: 1.1em;
     font-weight: 500;
-    color: var(--primary-text-color);
-  }
-
-  .automation-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
   }
 
   .automation-item {
@@ -97,58 +90,34 @@ const styles = `
     justify-content: space-between;
     align-items: center;
     padding: 8px;
+    margin: 4px 0;
     border-radius: 4px;
     background: var(--secondary-background-color);
   }
 
   .automation-name {
-    font-size: 14px;
-    color: var(--primary-text-color);
+    flex-grow: 1;
+    margin-right: 16px;
   }
 
   .automation-controls {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
   }
 
   .no-automations {
     color: var(--secondary-text-color);
     font-style: italic;
-    font-size: 14px;
+    padding: 8px;
+  }
+
+  .add-alarm {
+    margin-top: 16px;
     text-align: center;
-    padding: 8px;
   }
 
-  .automation-dialog {
-    padding: 16px;
-  }
-
-  .form-field {
-    margin-bottom: 16px;
-  }
-
-  .form-field label {
-    display: block;
-    margin-bottom: 4px;
-    color: var(--primary-text-color);
-    font-size: 14px;
-  }
-
-  .form-field input[type="text"],
-  .form-field input[type="number"],
-  .form-field select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid var(--divider-color);
-    border-radius: 4px;
-    background: var(--card-background-color);
-    color: var(--primary-text-color);
-  }
-
-  .form-field input[type="range"] {
-    width: 100%;
+  .add-alarm mwc-button {
+    --mdc-theme-primary: var(--primary-color);
   }
 `;
-
-export default styles;
