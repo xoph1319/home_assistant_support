@@ -1,6 +1,6 @@
 # Home Assistant Alarm Clock Component
 
-A custom component for Home Assistant that provides alarm clock functionality with a beautiful Lovelace UI card for easy management.
+A custom component for Home Assistant that provides alarm clock functionality with a beautiful Lovelace UI card for easy management and HomeKit integration.
 
 ## Features
 
@@ -11,6 +11,8 @@ A custom component for Home Assistant that provides alarm clock functionality wi
 - Automatic state management
 - Beautiful Lovelace UI card for easy management
 - Dynamic alarm creation and modification through the UI
+- HomeKit integration for controlling alarms through Apple devices
+- Skip next alarm functionality accessible through HomeKit
 
 ## Installation
 
@@ -18,6 +20,7 @@ A custom component for Home Assistant that provides alarm clock functionality wi
 2. Restart Home Assistant
 3. Add the configuration to your `configuration.yaml` (optional if using UI-only)
 4. Add the custom card to your Lovelace dashboard
+5. Enable HomeKit integration in Home Assistant if you want to use HomeKit features
 
 ### YAML Configuration (Optional)
 
@@ -36,6 +39,7 @@ alarm_clock:
         - wed
         - thu
         - fri
+      skip_next: false
 
     - name: "Weekend Alarm"
       time: "09:00"
@@ -44,7 +48,50 @@ alarm_clock:
       days:
         - sat
         - sun
+      skip_next: false
 ```
+
+### HomeKit Integration
+
+Each alarm will be exposed to HomeKit as a custom accessory that provides:
+
+1. A switch to control whether to skip the next occurrence:
+   - Turn OFF to skip the next alarm
+   - Turn ON to enable the next alarm
+2. Time control to set the alarm time directly from HomeKit:
+   - Use the Home app or Siri to check the current alarm time
+   - Change the alarm time using the Home app or Siri commands
+   - Supports voice commands like "Set the bedroom alarm to 7 AM"
+
+The switch will automatically reset to ON after the skipped alarm time has passed.
+
+To use the HomeKit integration:
+
+1. Make sure you have the HomeKit integration enabled in Home Assistant
+2. Add the following to your HomeKit configuration in `configuration.yaml`:
+
+```yaml
+homekit:
+  filter:
+    include_entities:
+      - alarm_clock.wake_up # Replace with your alarm entity IDs
+```
+
+3. Restart Home Assistant
+4. Add the accessory to your Apple Home app
+5. Use the accessory to:
+   - View the current alarm time
+   - Modify the alarm time
+   - Control whether the next alarm should be skipped
+
+#### HomeKit Voice Commands
+
+You can use Siri to control your alarms with commands like:
+
+- "What time is the bedroom alarm set for?"
+- "Set the bedroom alarm to 7:30 AM"
+- "Skip the next bedroom alarm"
+- "Enable the next bedroom alarm"
 
 ### Lovelace Card Configuration
 
@@ -65,16 +112,18 @@ The card will automatically display all your configured alarms and allow you to:
 - Set alarm time
 - Configure repeat settings
 - Select days for the alarm
+- Create and manage automations
 
 ### Configuration Options
 
-| Option    | Description                                | Required | Default       |
-| --------- | ------------------------------------------ | -------- | ------------- |
-| `name`    | Name of the alarm                          | Yes      | -             |
-| `time`    | Time for the alarm (24-hour format)        | Yes      | -             |
-| `enabled` | Whether the alarm is enabled               | No       | true          |
-| `repeat`  | Whether the alarm should repeat            | No       | false         |
-| `days`    | List of days when the alarm should trigger | No       | [] (all days) |
+| Option      | Description                                | Required | Default       |
+| ----------- | ------------------------------------------ | -------- | ------------- |
+| `name`      | Name of the alarm                          | Yes      | -             |
+| `time`      | Time for the alarm (24-hour format)        | Yes      | -             |
+| `enabled`   | Whether the alarm is enabled               | No       | true          |
+| `repeat`    | Whether the alarm should repeat            | No       | false         |
+| `days`      | List of days when the alarm should trigger | No       | [] (all days) |
+| `skip_next` | Whether to skip the next occurrence        | No       | false         |
 
 ## States
 
@@ -91,6 +140,7 @@ Each alarm entity will have the following attributes:
 - `enabled`: Whether the alarm is enabled
 - `repeat`: Whether the alarm repeats
 - `days`: List of days when the alarm is active
+- `skip_next`: Whether the next occurrence will be skipped
 
 ## Services
 
@@ -104,6 +154,7 @@ The following services are available for automation:
 | `alarm_clock.set_time`     | Change alarm time        | `entity_id`, `time`                         |
 | `alarm_clock.set_days`     | Set alarm days           | `entity_id`, `days`                         |
 | `alarm_clock.set_repeat`   | Set alarm repeat         | `entity_id`, `repeat`                       |
+| `alarm_clock.skip_next`    | Skip next occurrence     | `entity_id`                                 |
 
 ## Example Automations
 
