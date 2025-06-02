@@ -2,7 +2,7 @@ import {
   LitElement,
   html,
   css,
-} from "https://unpkg.com/lit-element@2.4.0/lit-element.js?module";
+} from "https://www.home-assistant.io/lit-element@2.4.0/lit-element.js?module";
 import { AlarmCardEditor } from "./alarm-card-editor.js";
 import styles from "./styles.js";
 
